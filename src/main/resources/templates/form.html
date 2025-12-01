@@ -20,61 +20,62 @@
                 <li><a href="/">Accueil</a></li>
                 <li><a href="/comptes">Voir les comptes</a></li>
             </ul>
-                <main>
-                        <div class="container">
-                            <div class="row justify-content-center">
-                                <div class="col-md-8">
-                                    <div class="card shadow-sm">
-                                        <div class="card-header bg-primary text-white">
-                                            <h5 class="mb-0"
-                                                th:text="${compte.id == 0} ? 'Nouveau Compte' : 'Modifier Compte'">
-                                                Formulaire Compte</h5>
+            <main>
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-md-8">
+                            <div class="card shadow-sm">
+                                <div class="card-header bg-primary text-white">
+                                    <h5 class="mb-0" th:text="${compte.id == 0} ? 'Nouveau Compte' : 'Modifier Compte'">
+                                        Formulaire Compte</h5>
+                                </div>
+                                <div class="card-body">
+                                    <form id="compteForm" th:action="@{/comptes}" th:object="${compte}" method="post">
+                                        <input type="hidden" th:field="*{id}" />
+                                        <div class="row g-3">
+                                            <div class="col-md-6">
+                                                <label for="numCarte" class="form-label"><i
+                                                        class="bi bi-credit-card"></i> Numéro de Carte *</label>
+                                                <input type="text" id="numCarte" th:field="*{numCarte}"
+                                                    class="form-control" placeholder="Numéro de Carte" pattern="\d{9}"
+                                                    minlength="9" maxlength="9"
+                                                    title="Le numéro de carte doit contenir exactement 9 chiffres"
+                                                    required>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="titulaire" class="form-label"><i class="bi bi-person"></i>
+                                                    Titulaire *</label>
+                                                <input type="text" id="titulaire" th:field="*{titulaire}"
+                                                    class="form-control" placeholder="Titulaire" required>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="solde" class="form-label"><i class="bi bi-cash"></i>
+                                                    Solde Initial *</label>
+                                                <input type="number" id="solde" th:field="*{solde}" class="form-control"
+                                                    placeholder="Solde Initial" required>
+                                            </div>
                                         </div>
-                                        <div class="card-body">
-                                            <form id="compteForm" th:action="@{/comptes}" th:object="${compte}"
-                                                method="post">
-                                                <input type="hidden" th:field="*{id}" />
-                                                <div class="row g-3">
-                                                    <div class="col-md-6">
-                                                        <label for="numCarte" class="form-label"><i
-                                                                class="bi bi-credit-card"></i> Numéro de Carte *</label>
-                                                        <input type="text" id="numCarte" th:field="*{numCarte}"
-                                                            class="form-control" placeholder="Numéro de Carte" required>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <label for="titulaire" class="form-label"><i
-                                                                class="bi bi-person"></i> Titulaire *</label>
-                                                        <input type="text" id="titulaire" th:field="*{titulaire}"
-                                                            class="form-control" placeholder="Titulaire" required>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <label for="solde" class="form-label"><i class="bi bi-cash"></i>
-                                                            Solde Initial *</label>
-                                                        <input type="number" id="solde" th:field="*{solde}"
-                                                            class="form-control" placeholder="Solde Initial" required>
-                                                    </div>
-                                                </div>
-                                                <div class="d-flex justify-content-between align-items-center mt-4">
-                                                    <a href="/comptes" class="btn btn-outline-secondary">
-                                                        <i class="bi bi-x-circle"></i> Annuler
-                                                    </a>
-                                                    <button type="submit" id="submitButton" class="btn btn-success">
-                                                        <i class="bi bi-check-circle"></i> <span
-                                                            th:text="${compte.id == 0} ? 'Créer' : 'Enregistrer'">Enregistrer</span>
-                                                    </button>
-                                                </div>
-                                            </form>
+                                        <div class="d-flex justify-content-between align-items-center mt-4">
+                                            <a href="/comptes" class="btn btn-outline-secondary">
+                                                <i class="bi bi-x-circle"></i> Annuler
+                                            </a>
+                                            <button type="submit" id="submitButton" class="btn btn-success">
+                                                <i class="bi bi-check-circle"></i> <span
+                                                    th:text="${compte.id == 0} ? 'Créer' : 'Enregistrer'">Enregistrer</span>
+                                            </button>
                                         </div>
-                                    </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
 
-                    </main>
-                </body>
-            </ul>
-        </nav>
-    </header>
+            </main>
+</body>
+</ul>
+</nav>
+</header>
 </body>
 
 </html>
