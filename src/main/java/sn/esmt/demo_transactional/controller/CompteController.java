@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import sn.esmt.demo_transactional.model.Compte;
 import sn.esmt.demo_transactional.service.ICompteService;
 
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -70,5 +71,30 @@ public class CompteController {
     public String supprimerCompte(@PathVariable("id") Integer id) {
         compteService.delete(id);
         return "redirect:/comptes";
+    }
+
+
+    @GetMapping("/search")
+    public String search(@RequestParam String query, Model model) {
+        List<Compte> comptes;
+
+        // Détecte si c'est un numéro de carte (9 chiffres uniquement)
+        if (query.matches("\\d{9}")) {
+            // Recherche par numéro de carte
+            comptes = compteService.rechercherParNumCarte(query);
+        } else {
+            // Recherche par nom de titulaire
+            comptes = compteService.rechercherParTitulaire(query);
+        }
+
+        model.addAttribute("comptes", comptes);
+        return "comptes";
+    }
+
+    @GetMapping("/solde-min")
+    public String soldeMin(@RequestParam double val, Model model) {
+        List<Compte> comptes = compteService.soldeSuperieur(val);
+        model.addAttribute("comptes", comptes);
+        return "comptes";
     }
 }

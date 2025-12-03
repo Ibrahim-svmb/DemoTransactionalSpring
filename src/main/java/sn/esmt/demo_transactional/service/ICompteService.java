@@ -10,4 +10,7 @@ public interface ICompteService {
     Optional<Compte> findById(Integer id);
     void delete(Integer id);
     void transferer(Integer idSource, Integer idDestination, double montant);
+    List<Compte> rechercherParTitulaire(String nom);
+    List<Compte> soldeSuperieur(double valeur);
+    List<Compte> rechercherParNumCarte(String numCarte);
 }

@@ -66,4 +66,20 @@ public class CompteServiceImpl implements ICompteService {
         compteRepository.save(sourceCompte);
         compteRepository.save(destinationCompte);
     }
+
+    @Override
+    public List<Compte> rechercherParTitulaire(String nom) {
+        return compteRepository.findByTitulaireContainingIgnoreCase(nom);
+    }
+
+    @Override
+    public List<Compte> soldeSuperieur(double valeur) {
+        return compteRepository.findBySoldeGreaterThan(valeur);
+    }
+
+    @Override
+    public List<Compte> rechercherParNumCarte(String numCarte) {
+        Optional<Compte> compte = compteRepository.findByNumCarte(numCarte);
+        return compte.map(List::of).orElse(List.of());
+    }
 }
